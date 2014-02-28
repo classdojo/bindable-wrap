@@ -5,7 +5,7 @@ function convert (obj) {
 
   var clone = new bindable.Object();
 
-  traverse(obj).forEach(function (x) {
+  traverse(traverse(obj).clone()).forEach(function (x) {
 
     var path = ["value"].concat(this.path);
 
