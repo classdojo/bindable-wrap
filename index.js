@@ -7,9 +7,15 @@ function convert (obj) {
 
   traverse(obj).forEach(function (x) {
 
-    if (typeof x !== "object" || !x) return;
-
     var path = ["value"].concat(this.path);
+
+    if (typeof x !== "object" || !x) {
+      if (!this.path.length) {
+        clone.set(path, x);
+      }
+      return;
+    }
+
 
     if (Object.prototype.toString.call(x) === "[object Array]") {
       clone.set(path, new bindable.Collection(x.map(convert)));
